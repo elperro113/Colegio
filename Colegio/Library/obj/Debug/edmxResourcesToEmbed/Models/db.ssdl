@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="colegiodbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="colegiodbModelStoreContainer">
+    <EntitySet Name="Usuarios" EntityType="colegiodbModel.Store.Usuarios" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="colegiodbModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Permisos" EntityType="colegiodbModel.Store.Permisos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TipoUsuarios" EntityType="colegiodbModel.Store.TipoUsuarios" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Secciones" EntityType="colegiodbModel.Store.Secciones" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Seguridad_Estatus" EntityType="colegiodbModel.Store.Seguridad_Estatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UsuarioRole" EntityType="colegiodbModel.Store.UsuarioRole" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RolePermiso" EntityType="colegiodbModel.Store.RolePermiso" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_UsuarioRole_Usuario" Association="colegiodbModel.Store.FK_UsuarioRole_Usuario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="UsuarioRole" EntitySet="UsuarioRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioRole_Role" Association="colegiodbModel.Store.FK_UsuarioRole_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="UsuarioRole" EntitySet="UsuarioRole" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioTipoUsuario" Association="colegiodbModel.Store.UsuarioTipoUsuario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="TipoUsuario" EntitySet="TipoUsuarios" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioSeguridad_Estatus" Association="colegiodbModel.Store.UsuarioSeguridad_Estatus">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Seguridad_Estatus" EntitySet="Seguridad_Estatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolePermiso_Role" Association="colegiodbModel.Store.FK_RolePermiso_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="RolePermiso" EntitySet="RolePermiso" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolePermiso_Permiso" Association="colegiodbModel.Store.FK_RolePermiso_Permiso">
+      <End Role="Permiso" EntitySet="Permisos" />
+      <End Role="RolePermiso" EntitySet="RolePermiso" />
+    </AssociationSet>
+    <AssociationSet Name="SeccionPermiso" Association="colegiodbModel.Store.SeccionPermiso">
+      <End Role="Seccion" EntitySet="Secciones" />
+      <End Role="Permiso" EntitySet="Permisos" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Cedula" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="RNC" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Tipo" Type="int" Nullable="false" />
+    <Property Name="Estatus" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Activo" Type="bit" Nullable="false" DefaultValue="true" />
+  </EntityType>
+  <EntityType Name="Permisos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SeccionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoUsuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Secciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Orden" Type="int" Nullable="false" DefaultValue="0" />
+  </EntityType>
+  <EntityType Name="Seguridad_Estatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UsuarioRole">
+    <Key>
+      <PropertyRef Name="Usuarios_Id" />
+      <PropertyRef Name="Roles_Id" />
+    </Key>
+    <Property Name="Usuarios_Id" Type="int" Nullable="false" />
+    <Property Name="Roles_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RolePermiso">
+    <Key>
+      <PropertyRef Name="Roles_Id" />
+      <PropertyRef Name="Permisos_Id" />
+    </Key>
+    <Property Name="Roles_Id" Type="int" Nullable="false" />
+    <Property Name="Permisos_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UsuarioTipoUsuario">
+    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="*" />
+    <End Role="TipoUsuario" Type="colegiodbModel.Store.TipoUsuarios" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioSeguridad_Estatus">
+    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="*" />
+    <End Role="Seguridad_Estatus" Type="colegiodbModel.Store.Seguridad_Estatus" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Seguridad_Estatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SeccionPermiso">
+    <End Role="Seccion" Type="colegiodbModel.Store.Secciones" Multiplicity="1" />
+    <End Role="Permiso" Type="colegiodbModel.Store.Permisos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seccion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Permiso">
+        <PropertyRef Name="SeccionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioRole_Usuario">
+    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="1" />
+    <End Role="UsuarioRole" Type="colegiodbModel.Store.UsuarioRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsuarioRole">
+        <PropertyRef Name="Usuarios_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioRole_Role">
+    <End Role="UsuarioRole" Type="colegiodbModel.Store.UsuarioRole" Multiplicity="*" />
+    <End Role="Role" Type="colegiodbModel.Store.Roles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsuarioRole">
+        <PropertyRef Name="Roles_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolePermiso_Role">
+    <End Role="Role" Type="colegiodbModel.Store.Roles" Multiplicity="1" />
+    <End Role="RolePermiso" Type="colegiodbModel.Store.RolePermiso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RolePermiso">
+        <PropertyRef Name="Roles_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolePermiso_Permiso">
+    <End Role="RolePermiso" Type="colegiodbModel.Store.RolePermiso" Multiplicity="*" />
+    <End Role="Permiso" Type="colegiodbModel.Store.Permisos" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Permiso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RolePermiso">
+        <PropertyRef Name="Permisos_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

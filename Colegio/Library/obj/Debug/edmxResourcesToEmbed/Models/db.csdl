@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="colegiodbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Context" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Usuarios" EntityType="colegiodbModel.Usuario" />
+    <EntitySet Name="Roles" EntityType="colegiodbModel.Role" />
+    <EntitySet Name="Permisos" EntityType="colegiodbModel.Permiso" />
+    <EntitySet Name="TipoUsuarios" EntityType="colegiodbModel.TipoUsuario" />
+    <EntitySet Name="Secciones" EntityType="colegiodbModel.Seccion" />
+    <EntitySet Name="Seguridad_Estatus" EntityType="colegiodbModel.Seguridad_Estatus" />
+    <AssociationSet Name="UsuarioRole" Association="colegiodbModel.UsuarioRole">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Role" EntitySet="Roles" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioTipoUsuario" Association="colegiodbModel.UsuarioTipoUsuario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="TipoUsuario" EntitySet="TipoUsuarios" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioSeguridad_Estatus" Association="colegiodbModel.UsuarioSeguridad_Estatus">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Seguridad_Estatus" EntitySet="Seguridad_Estatus" />
+    </AssociationSet>
+    <AssociationSet Name="RolePermiso" Association="colegiodbModel.RolePermiso">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Permiso" EntitySet="Permisos" />
+    </AssociationSet>
+    <AssociationSet Name="SeccionPermiso" Association="colegiodbModel.SeccionPermiso">
+      <End Role="Seccion" EntitySet="Secciones" />
+      <End Role="Permiso" EntitySet="Permisos" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Nombre" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Apellido" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Cedula" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RNC" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Tipo" Type="Int32" Nullable="false" />
+    <Property Name="Estatus" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Roles" Relationship="colegiodbModel.UsuarioRole" FromRole="Usuario" ToRole="Role" />
+    <NavigationProperty Name="TipoUsuario" Relationship="colegiodbModel.UsuarioTipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+    <NavigationProperty Name="Seguridad_Estatus" Relationship="colegiodbModel.UsuarioSeguridad_Estatus" FromRole="Usuario" ToRole="Seguridad_Estatus" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" DefaultValue="True" />
+    <NavigationProperty Name="Usuarios" Relationship="colegiodbModel.UsuarioRole" FromRole="Role" ToRole="Usuario" />
+    <NavigationProperty Name="Permisos" Relationship="colegiodbModel.RolePermiso" FromRole="Role" ToRole="Permiso" />
+  </EntityType>
+  <EntityType Name="Permiso">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SeccionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Roles" Relationship="colegiodbModel.RolePermiso" FromRole="Permiso" ToRole="Role" />
+    <NavigationProperty Name="Seccion" Relationship="colegiodbModel.SeccionPermiso" FromRole="Permiso" ToRole="Seccion" />
+  </EntityType>
+  <EntityType Name="TipoUsuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Descripcion" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Usuarios" Relationship="colegiodbModel.UsuarioTipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Seccion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Orden" Type="Int32" Nullable="false" DefaultValue="0" />
+    <NavigationProperty Name="Permisos" Relationship="colegiodbModel.SeccionPermiso" FromRole="Seccion" ToRole="Permiso" />
+  </EntityType>
+  <EntityType Name="Seguridad_Estatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Usuarios" Relationship="colegiodbModel.UsuarioSeguridad_Estatus" FromRole="Seguridad_Estatus" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="UsuarioRole">
+    <End Type="colegiodbModel.Usuario" Role="Usuario" Multiplicity="*" />
+    <End Type="colegiodbModel.Role" Role="Role" Multiplicity="*" />
+  </Association>
+  <Association Name="UsuarioTipoUsuario">
+    <End Type="colegiodbModel.Usuario" Role="Usuario" Multiplicity="*" />
+    <End Type="colegiodbModel.TipoUsuario" Role="TipoUsuario" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioSeguridad_Estatus">
+    <End Type="colegiodbModel.Usuario" Role="Usuario" Multiplicity="*" />
+    <End Type="colegiodbModel.Seguridad_Estatus" Role="Seguridad_Estatus" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Seguridad_Estatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Estatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RolePermiso">
+    <End Type="colegiodbModel.Role" Role="Role" Multiplicity="*" />
+    <End Type="colegiodbModel.Permiso" Role="Permiso" Multiplicity="*" />
+  </Association>
+  <Association Name="SeccionPermiso">
+    <End Type="colegiodbModel.Seccion" Role="Seccion" Multiplicity="1" />
+    <End Type="colegiodbModel.Permiso" Role="Permiso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seccion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Permiso">
+        <PropertyRef Name="SeccionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
