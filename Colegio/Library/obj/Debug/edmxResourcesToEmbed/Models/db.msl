@@ -62,6 +62,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Estudiantes">
+      <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.Estudiante)">
+        <MappingFragment StoreEntitySet="Estudiantes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="UsuarioRole" TypeName="colegiodbModel.UsuarioRole" StoreEntitySet="UsuarioRole">
       <EndProperty Name="Usuario">
         <ScalarProperty Name="Id" ColumnName="Usuarios_Id" />

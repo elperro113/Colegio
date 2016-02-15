@@ -33,5 +33,6 @@ namespace Library.Models
         public virtual ICollection<Role> Roles { get; set; }
         public virtual TipoUsuario TipoUsuario { get; set; }
         public virtual Seguridad_Estatus Seguridad_Estatus { get; set; }
+        public virtual Estudiante Estudiante { get; set; }
     }
 }

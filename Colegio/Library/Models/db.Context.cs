@@ -31,15 +31,6 @@ namespace Library.Models
         public virtual DbSet<TipoUsuario> TipoUsuarios { get; set; }
         public virtual DbSet<Seccion> Secciones { get; set; }
         public virtual DbSet<Seguridad_Estatus> Seguridad_Estatus { get; set; }
-        public virtual DbSet<Aula> Aulas { get; set; }
-        public virtual DbSet<Grado> Grados { get; set; }
-        public virtual DbSet<Curso> Cursos { get; set; }
-        public virtual DbSet<Asistencia> Asistencias { get; set; }
-        public virtual DbSet<Examen> Examenes { get; set; }
         public virtual DbSet<Estudiante> Estudiantes { get; set; }
-        public virtual DbSet<Profesor> Profesores { get; set; }
-        public virtual DbSet<Padre> Padres { get; set; }
-        public virtual DbSet<ExamenResultado> ExamenResultados { get; set; }
-        public virtual DbSet<ExamenTipo> ExamenTipos { get; set; }
     }
 }
