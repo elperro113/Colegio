@@ -6,7 +6,6 @@ using System.Text;
 using Library.Models;
 using Library.Base;
 
-
 namespace Library.Repository
 {
     public class Usuarios : Base<Usuario>, IBaseRepository<Usuario>
@@ -64,11 +63,7 @@ namespace Library.Repository
         public IQueryable<Seccion> GetSecciones(int usuarioId)
         {
             return GetSeccionesByUserName(usuarioId);
-        
+
         }
-
-        
-
-
     }
 }

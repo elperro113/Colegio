@@ -14,6 +14,5 @@ C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Li
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\bin\Debug\EntityFramework.xml
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\obj\Debug\Library.dll
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\obj\Debug\Library.pdb

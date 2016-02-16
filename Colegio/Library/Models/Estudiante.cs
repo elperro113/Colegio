@@ -22,7 +22,6 @@ namespace Library.Models
         public string Celular { get; set; }
         public System.DateTime Fecha_ingreso { get; set; }
         public bool Status { get; set; }
-        public System.DateTime Ult_Fecha_Act { get; set; }
         public System.DateTime Ult_Fecha_act { get; set; }
     
         public virtual Usuario Usuario { get; set; }

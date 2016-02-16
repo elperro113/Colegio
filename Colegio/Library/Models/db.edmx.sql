@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/15/2016 16:53:58
+-- Date Created: 02/16/2016 09:43:33
 -- Generated from EDMX file: C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\Models\db.edmx
 -- --------------------------------------------------
 
@@ -143,7 +143,6 @@ CREATE TABLE [dbo].[Estudiantes] (
     [Celular] nvarchar(max)  NULL,
     [Fecha_ingreso] datetime  NOT NULL,
     [Status] bit  NOT NULL,
-    [Ult_Fecha_Act] datetime  NOT NULL,
     [Ult_Fecha_act] datetime  NOT NULL,
     [Usuario_Id] int  NOT NULL
 );

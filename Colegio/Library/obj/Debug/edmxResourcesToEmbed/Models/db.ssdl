@@ -38,6 +38,10 @@
       <End Role="Seccion" EntitySet="Secciones" />
       <End Role="Permiso" EntitySet="Permisos" />
     </AssociationSet>
+    <AssociationSet Name="EstudianteUsuario" Association="colegiodbModel.Store.EstudianteUsuario">
+      <End Role="Estudiante" EntitySet="Estudiantes" />
+      <End Role="Usuario" EntitySet="Usuarios" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Usuarios">
     <Key>
@@ -99,7 +103,15 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PadreId" Type="int" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Celular" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Fecha_ingreso" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Ult_Fecha_act" Type="datetime" Nullable="false" />
+    <Property Name="Usuario_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioRole">
     <Key>
@@ -150,6 +162,18 @@
       </Principal>
       <Dependent Role="Permiso">
         <PropertyRef Name="SeccionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EstudianteUsuario">
+    <End Role="Estudiante" Type="colegiodbModel.Store.Estudiantes" Multiplicity="*" />
+    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Estudiante">
+        <PropertyRef Name="Usuario_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

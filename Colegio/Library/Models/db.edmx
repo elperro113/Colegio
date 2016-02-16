@@ -115,7 +115,6 @@
     <Property Name="Celular" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Fecha_ingreso" Type="datetime" Nullable="false" />
     <Property Name="Status" Type="bit" Nullable="false" />
-    <Property Name="Ult_Fecha_Act" Type="datetime" Nullable="false" />
     <Property Name="Ult_Fecha_act" Type="datetime" Nullable="false" />
     <Property Name="Usuario_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -390,7 +389,6 @@
           <Property Name="Celular" Type="String" Nullable="true" />
           <Property Name="Fecha_ingreso" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
-          <Property Name="Ult_Fecha_Act" Type="DateTime" Nullable="false" />
           <Property Name="Ult_Fecha_act" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Usuario" Relationship="colegiodbModel.EstudianteUsuario" FromRole="Estudiante" ToRole="Usuario" />
         </EntityType>
@@ -476,7 +474,6 @@
           <ScalarProperty Name="Celular" ColumnName="Celular" />
           <ScalarProperty Name="Fecha_ingreso" ColumnName="Fecha_ingreso" />
           <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Ult_Fecha_Act" ColumnName="Ult_Fecha_Act" />
           <ScalarProperty Name="Ult_Fecha_act" ColumnName="Ult_Fecha_act" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -495,6 +492,14 @@
       </EndProperty>
       <EndProperty Name="Permiso">
         <ScalarProperty Name="Id" ColumnName="Permisos_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EstudianteUsuario" TypeName="colegiodbModel.EstudianteUsuario" StoreEntitySet="Estudiantes">
+      <EndProperty Name="Usuario">
+        <ScalarProperty Name="Id" ColumnName="Usuario_Id" />
+      </EndProperty>
+      <EndProperty Name="Estudiante">
+        <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

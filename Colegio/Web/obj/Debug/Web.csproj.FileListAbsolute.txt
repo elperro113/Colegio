@@ -23,10 +23,14 @@ C:\ProyectoColegio\Colegio\Web\bin\Antlr3.Runtime.pdb
 C:\ProyectoColegio\Colegio\Web\bin\Newtonsoft.Json.xml
 C:\ProyectoColegio\Colegio\Web\obj\Debug\Web.dll
 C:\ProyectoColegio\Colegio\Web\obj\Debug\Web.pdb
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Web.dll.config
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Web.dll
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Web.pdb
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Antlr3.Runtime.dll
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\EntityFramework.dll
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\EntityFramework.SqlServer.dll
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Library.dll
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Newtonsoft.Json.dll
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\System.Web.Helpers.dll
@@ -37,6 +41,9 @@ C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\We
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\System.Web.WebPages.dll
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\System.Web.WebPages.Razor.dll
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\WebGrease.dll
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Library.pdb
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\EntityFramework.xml
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\EntityFramework.SqlServer.xml
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\System.Web.Helpers.xml
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\System.Web.Mvc.xml
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\System.Web.Optimization.xml
@@ -46,6 +53,5 @@ C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\We
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\System.Web.WebPages.Razor.xml
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Antlr3.Runtime.pdb
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Newtonsoft.Json.xml
-C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\obj\Debug\Web.dll
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\obj\Debug\Web.pdb
