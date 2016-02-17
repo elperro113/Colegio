@@ -23,7 +23,6 @@ C:\ProyectoColegio\Colegio\Web\bin\Antlr3.Runtime.pdb
 C:\ProyectoColegio\Colegio\Web\bin\Newtonsoft.Json.xml
 C:\ProyectoColegio\Colegio\Web\obj\Debug\Web.dll
 C:\ProyectoColegio\Colegio\Web\obj\Debug\Web.pdb
-C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Web.dll.config
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Web.dll
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Web.pdb
@@ -53,5 +52,6 @@ C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\We
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\System.Web.WebPages.Razor.xml
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Antlr3.Runtime.pdb
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\bin\Newtonsoft.Json.xml
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\obj\Debug\Web.dll
 C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Web\obj\Debug\Web.pdb

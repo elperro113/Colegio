@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Library.Models.Role>
+<h3>
+    @Html.Label("")
+</h3>
+@using (Html.BeginForm("AddRole", "Usuario"))
+{
+    @Html.DropDownList("RoleId", new SelectList(Model, "Id", "Nombre"))
+    <input type="hidden" name="UserId" id="UserId" value="@ViewData["UserId"]" />
+    <input align="top" type="image" value="submit" src="../../Content/img/finder.png" alt="submit Button" />
+
+}

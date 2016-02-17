@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Library.Models.Role>
+<h3>
+    @Html.Label("")</h3>
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activo)
+            </td>
+            <td>
+                @using (Html.BeginForm("DeleteRole", "Usuario"))
+               {
+                    <input type="hidden" name="userId" id="userId" value="@ViewData["UserId"]" />
+                    <input type="hidden" name="roleId" id="roleId" value="@item.Id" />
+                    <input align="top" type="image" value="submit" src="../../Content/img/delete.png" alt="submit Button" />
+               }
+            </td>
+        </tr>
+    }
+</table>

@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
-using Library.Models;
+using System.Threading.Tasks;
 using Library.Base;
+using Library.Models;
 
 namespace Library.Repository
 {
-    public class Usuarios : Base<Usuario>, IBaseRepository<Usuario>
+    public class UsuarioRepository : Base<Usuario>, IBaseRepository<Usuario>
     {
-
-        public Usuarios() : base() { }
-        public Usuarios(Context cont) : base(cont) { }
+        public UsuarioRepository() : base() { }
+        public UsuarioRepository(Context cont) : base(cont) { }
 
         public Usuario GetById(int Id)
         {

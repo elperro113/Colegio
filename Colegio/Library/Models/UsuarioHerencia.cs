@@ -15,25 +15,24 @@ namespace Library.Models
         /// <returns>Una coleccion de Section</returns>
         public IQueryable<Seccion> Secciones()
         {
-            Usuarios _RepUser = new Usuarios();
+            UsuarioRepository _RepUser = new UsuarioRepository();
             return _RepUser.GetSeccionesByUserName(this.Id);
         }
 
         /// <summary>
         /// Trae los permisos que tiene un usuario por cada seccion
-        /// </summary>
         /// <param name="sectionId">El ID de la Seccion</param>
         /// <returns>Una coleccion de Permission</returns>
         public IQueryable<Permiso> Permisos(int sectionId)
         {
-            Usuarios _RepUser = new Usuarios();
+            UsuarioRepository _RepUser = new UsuarioRepository();
             return _RepUser.GetPermisosBySectionAndUser(this.Id, sectionId);
         }
 
 
         public IQueryable<Permiso> Permisos()
         {
-            Usuarios _RepUser = new Usuarios();
+            UsuarioRepository _RepUser = new UsuarioRepository();
             return _RepUser.GetPermisos(this.Id);
         }
     }
