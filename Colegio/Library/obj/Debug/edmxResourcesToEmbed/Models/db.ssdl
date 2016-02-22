@@ -7,6 +7,8 @@
     <EntitySet Name="TipoUsuarios" EntityType="colegiodbModel.Store.TipoUsuarios" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Secciones" EntityType="colegiodbModel.Store.Secciones" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Seguridad_Estatus" EntityType="colegiodbModel.Store.Seguridad_Estatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Estudiantes" EntityType="colegiodbModel.Store.Estudiantes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Profesores" EntityType="colegiodbModel.Store.Profesores" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UsuarioRole" EntityType="colegiodbModel.Store.UsuarioRole" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="RolePermiso" EntityType="colegiodbModel.Store.RolePermiso" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_UsuarioRole_Usuario" Association="colegiodbModel.Store.FK_UsuarioRole_Usuario">
@@ -37,17 +39,25 @@
       <End Role="Seccion" EntitySet="Secciones" />
       <End Role="Permiso" EntitySet="Permisos" />
     </AssociationSet>
+    <AssociationSet Name="EstudianteUsuario" Association="colegiodbModel.Store.EstudianteUsuario">
+      <End Role="Estudiante" EntitySet="Estudiantes" />
+      <End Role="Usuario" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="ProfesorUsuario" Association="colegiodbModel.Store.ProfesorUsuario">
+      <End Role="Profesor" EntitySet="Profesores" />
+      <End Role="Usuario" EntitySet="Usuarios" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Usuarios">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Nombre" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Apellido" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Cedula" Type="nvarchar(max)" Nullable="true" />
     <Property Name="RNC" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Tipo" Type="int" Nullable="false" />
@@ -92,6 +102,34 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Estudiantes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Celular" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Fecha_ingreso" Type="datetime" Nullable="false" />
+    <Property Name="Ult_Fecha_act" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Profesores">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Celular" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Fecha_ingreso" Type="datetime" Nullable="false" />
+    <Property Name="Ult_Fecha_act" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioRole">
     <Key>
@@ -142,6 +180,30 @@
       </Principal>
       <Dependent Role="Permiso">
         <PropertyRef Name="SeccionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EstudianteUsuario">
+    <End Role="Estudiante" Type="colegiodbModel.Store.Estudiantes" Multiplicity="1" />
+    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Estudiante">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProfesorUsuario">
+    <End Role="Profesor" Type="colegiodbModel.Store.Profesores" Multiplicity="1" />
+    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Profesor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

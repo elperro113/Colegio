@@ -12,19 +12,10 @@
     <EntitySet Name="TipoUsuarios" EntityType="colegiodbModel.Store.TipoUsuarios" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Secciones" EntityType="colegiodbModel.Store.Secciones" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Seguridad_Estatus" EntityType="colegiodbModel.Store.Seguridad_Estatus" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Aulas" EntityType="colegiodbModel.Store.Aulas" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Grados" EntityType="colegiodbModel.Store.Grados" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Cursos" EntityType="colegiodbModel.Store.Cursos" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Asistencias" EntityType="colegiodbModel.Store.Asistencias" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Examenes" EntityType="colegiodbModel.Store.Examenes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Estudiantes" EntityType="colegiodbModel.Store.Estudiantes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Profesores" EntityType="colegiodbModel.Store.Profesores" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Padres" EntityType="colegiodbModel.Store.Padres" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ExamenResultados" EntityType="colegiodbModel.Store.ExamenResultados" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ExamenTipos" EntityType="colegiodbModel.Store.ExamenTipos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UsuarioRole" EntityType="colegiodbModel.Store.UsuarioRole" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="RolePermiso" EntityType="colegiodbModel.Store.RolePermiso" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="AulaEstudiante" EntityType="colegiodbModel.Store.AulaEstudiante" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_UsuarioRole_Usuario" Association="colegiodbModel.Store.FK_UsuarioRole_Usuario">
       <End Role="Usuario" EntitySet="Usuarios" />
       <End Role="UsuarioRole" EntitySet="UsuarioRole" />
@@ -53,49 +44,13 @@
       <End Role="Seccion" EntitySet="Secciones" />
       <End Role="Permiso" EntitySet="Permisos" />
     </AssociationSet>
-    <AssociationSet Name="GradoCurso" Association="colegiodbModel.Store.GradoCurso">
-      <End Role="Grado" EntitySet="Grados" />
-      <End Role="Curso" EntitySet="Cursos" />
-    </AssociationSet>
-    <AssociationSet Name="GradoAula" Association="colegiodbModel.Store.GradoAula">
-      <End Role="Grado" EntitySet="Grados" />
-      <End Role="Aula" EntitySet="Aulas" />
-    </AssociationSet>
-    <AssociationSet Name="AsistenciaEstudiante" Association="colegiodbModel.Store.AsistenciaEstudiante">
-      <End Role="Asistencia" EntitySet="Asistencias" />
+    <AssociationSet Name="EstudianteUsuario" Association="colegiodbModel.Store.EstudianteUsuario">
       <End Role="Estudiante" EntitySet="Estudiantes" />
+      <End Role="Usuario" EntitySet="Usuarios" />
     </AssociationSet>
-    <AssociationSet Name="ExamenTipoExamen" Association="colegiodbModel.Store.ExamenTipoExamen">
-      <End Role="ExamenTipo" EntitySet="ExamenTipos" />
-      <End Role="Examen" EntitySet="Examenes" />
-    </AssociationSet>
-    <AssociationSet Name="ExamenExamenResultado" Association="colegiodbModel.Store.ExamenExamenResultado">
-      <End Role="Examen" EntitySet="Examenes" />
-      <End Role="ExamenResultado" EntitySet="ExamenResultados" />
-    </AssociationSet>
-    <AssociationSet Name="PadreEstudiante" Association="colegiodbModel.Store.PadreEstudiante">
-      <End Role="Padre" EntitySet="Padres" />
-      <End Role="Estudiante" EntitySet="Estudiantes" />
-    </AssociationSet>
-    <AssociationSet Name="EstudianteExamenResultado" Association="colegiodbModel.Store.EstudianteExamenResultado">
-      <End Role="Estudiante" EntitySet="Estudiantes" />
-      <End Role="ExamenResultado" EntitySet="ExamenResultados" />
-    </AssociationSet>
-    <AssociationSet Name="ProfesorAula" Association="colegiodbModel.Store.ProfesorAula">
-      <End Role="Aula" EntitySet="Aulas" />
+    <AssociationSet Name="ProfesorUsuario" Association="colegiodbModel.Store.ProfesorUsuario">
       <End Role="Profesor" EntitySet="Profesores" />
-    </AssociationSet>
-    <AssociationSet Name="CursoExamenResultado" Association="colegiodbModel.Store.CursoExamenResultado">
-      <End Role="Curso" EntitySet="Cursos" />
-      <End Role="ExamenResultado" EntitySet="ExamenResultados" />
-    </AssociationSet>
-    <AssociationSet Name="FK_AulaEstudiante_Aula" Association="colegiodbModel.Store.FK_AulaEstudiante_Aula">
-      <End Role="Aula" EntitySet="Aulas" />
-      <End Role="AulaEstudiante" EntitySet="AulaEstudiante" />
-    </AssociationSet>
-    <AssociationSet Name="FK_AulaEstudiante_Estudiante" Association="colegiodbModel.Store.FK_AulaEstudiante_Estudiante">
-      <End Role="Estudiante" EntitySet="Estudiantes" />
-      <End Role="AulaEstudiante" EntitySet="AulaEstudiante" />
+      <End Role="Usuario" EntitySet="Usuarios" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Usuarios">
@@ -103,11 +58,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Nombre" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Apellido" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Cedula" Type="nvarchar(max)" Nullable="true" />
     <Property Name="RNC" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Tipo" Type="int" Nullable="false" />
@@ -153,74 +108,33 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
-  <EntityType Name="Aulas">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="GradoId" Type="int" Nullable="false" />
-    <Property Name="ProfesorId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Grados">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Cursos">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="GradoId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Asistencias">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="EstudianteId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Examenes">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ExamenTipoId" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="Estudiantes">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PadreId" Type="int" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Celular" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Fecha_ingreso" Type="datetime" Nullable="false" />
+    <Property Name="Ult_Fecha_act" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Profesores">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Padres">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ExamenResultados">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ExamenId" Type="int" Nullable="false" />
-    <Property Name="EstudianteId" Type="int" Nullable="false" />
-    <Property Name="CursoId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ExamenTipos">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Celular" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Fecha_ingreso" Type="datetime" Nullable="false" />
+    <Property Name="Ult_Fecha_act" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioRole">
     <Key>
@@ -237,14 +151,6 @@
     </Key>
     <Property Name="Roles_Id" Type="int" Nullable="false" />
     <Property Name="Permisos_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="AulaEstudiante">
-    <Key>
-      <PropertyRef Name="Aulas_Id" />
-      <PropertyRef Name="Estudiantes_Id" />
-    </Key>
-    <Property Name="Aulas_Id" Type="int" Nullable="false" />
-    <Property Name="Estudiantes_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="UsuarioTipoUsuario">
     <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="*" />
@@ -282,111 +188,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="GradoCurso">
-    <End Role="Grado" Type="colegiodbModel.Store.Grados" Multiplicity="1" />
-    <End Role="Curso" Type="colegiodbModel.Store.Cursos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Grado">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Curso">
-        <PropertyRef Name="GradoId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="GradoAula">
-    <End Role="Grado" Type="colegiodbModel.Store.Grados" Multiplicity="1" />
-    <End Role="Aula" Type="colegiodbModel.Store.Aulas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Grado">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Aula">
-        <PropertyRef Name="GradoId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="AsistenciaEstudiante">
-    <End Role="Asistencia" Type="colegiodbModel.Store.Asistencias" Multiplicity="*" />
+  <Association Name="EstudianteUsuario">
     <End Role="Estudiante" Type="colegiodbModel.Store.Estudiantes" Multiplicity="1" />
+    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Estudiante">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Asistencia">
-        <PropertyRef Name="EstudianteId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ExamenTipoExamen">
-    <End Role="ExamenTipo" Type="colegiodbModel.Store.ExamenTipos" Multiplicity="1" />
-    <End Role="Examen" Type="colegiodbModel.Store.Examenes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ExamenTipo">
+      <Dependent Role="Usuario">
         <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Examen">
-        <PropertyRef Name="ExamenTipoId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ExamenExamenResultado">
-    <End Role="Examen" Type="colegiodbModel.Store.Examenes" Multiplicity="1" />
-    <End Role="ExamenResultado" Type="colegiodbModel.Store.ExamenResultados" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Examen">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ExamenResultado">
-        <PropertyRef Name="ExamenId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PadreEstudiante">
-    <End Role="Padre" Type="colegiodbModel.Store.Padres" Multiplicity="1" />
-    <End Role="Estudiante" Type="colegiodbModel.Store.Estudiantes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Padre">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Estudiante">
-        <PropertyRef Name="PadreId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="EstudianteExamenResultado">
-    <End Role="Estudiante" Type="colegiodbModel.Store.Estudiantes" Multiplicity="1" />
-    <End Role="ExamenResultado" Type="colegiodbModel.Store.ExamenResultados" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Estudiante">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ExamenResultado">
-        <PropertyRef Name="EstudianteId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ProfesorAula">
-    <End Role="Aula" Type="colegiodbModel.Store.Aulas" Multiplicity="*" />
+  <Association Name="ProfesorUsuario">
     <End Role="Profesor" Type="colegiodbModel.Store.Profesores" Multiplicity="1" />
+    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Profesor">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Aula">
-        <PropertyRef Name="ProfesorId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CursoExamenResultado">
-    <End Role="Curso" Type="colegiodbModel.Store.Cursos" Multiplicity="1" />
-    <End Role="ExamenResultado" Type="colegiodbModel.Store.ExamenResultados" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Curso">
+      <Dependent Role="Usuario">
         <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ExamenResultado">
-        <PropertyRef Name="CursoId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -438,30 +260,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_AulaEstudiante_Aula">
-    <End Role="Aula" Type="colegiodbModel.Store.Aulas" Multiplicity="1" />
-    <End Role="AulaEstudiante" Type="colegiodbModel.Store.AulaEstudiante" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Aula">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AulaEstudiante">
-        <PropertyRef Name="Aulas_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AulaEstudiante_Estudiante">
-    <End Role="AulaEstudiante" Type="colegiodbModel.Store.AulaEstudiante" Multiplicity="*" />
-    <End Role="Estudiante" Type="colegiodbModel.Store.Estudiantes" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Estudiante">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AulaEstudiante">
-        <PropertyRef Name="Estudiantes_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -493,67 +291,27 @@
             <End Role="Seccion" EntitySet="Secciones" />
             <End Role="Permiso" EntitySet="Permisos" />
           </AssociationSet>
-          <EntitySet Name="Aulas" EntityType="colegiodbModel.Aula" />
-          <EntitySet Name="Grados" EntityType="colegiodbModel.Grado" />
-          <EntitySet Name="Cursos" EntityType="colegiodbModel.Curso" />
-          <EntitySet Name="Asistencias" EntityType="colegiodbModel.Asistencia" />
-          <EntitySet Name="Examenes" EntityType="colegiodbModel.Examen" />
           <EntitySet Name="Estudiantes" EntityType="colegiodbModel.Estudiante" />
           <EntitySet Name="Profesores" EntityType="colegiodbModel.Profesor" />
-          <EntitySet Name="Padres" EntityType="colegiodbModel.Padre" />
-          <EntitySet Name="ExamenResultados" EntityType="colegiodbModel.ExamenResultado" />
-          <EntitySet Name="ExamenTipos" EntityType="colegiodbModel.ExamenTipo" />
-          <AssociationSet Name="GradoCurso" Association="colegiodbModel.GradoCurso">
-            <End Role="Grado" EntitySet="Grados" />
-            <End Role="Curso" EntitySet="Cursos" />
-          </AssociationSet>
-          <AssociationSet Name="GradoAula" Association="colegiodbModel.GradoAula">
-            <End Role="Grado" EntitySet="Grados" />
-            <End Role="Aula" EntitySet="Aulas" />
-          </AssociationSet>
-          <AssociationSet Name="AsistenciaEstudiante" Association="colegiodbModel.AsistenciaEstudiante">
-            <End Role="Asistencia" EntitySet="Asistencias" />
+          <AssociationSet Name="EstudianteUsuario" Association="colegiodbModel.EstudianteUsuario">
             <End Role="Estudiante" EntitySet="Estudiantes" />
+            <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
-          <AssociationSet Name="ExamenTipoExamen" Association="colegiodbModel.ExamenTipoExamen">
-            <End Role="ExamenTipo" EntitySet="ExamenTipos" />
-            <End Role="Examen" EntitySet="Examenes" />
-          </AssociationSet>
-          <AssociationSet Name="ExamenExamenResultado" Association="colegiodbModel.ExamenExamenResultado">
-            <End Role="Examen" EntitySet="Examenes" />
-            <End Role="ExamenResultado" EntitySet="ExamenResultados" />
-          </AssociationSet>
-          <AssociationSet Name="PadreEstudiante" Association="colegiodbModel.PadreEstudiante">
-            <End Role="Padre" EntitySet="Padres" />
-            <End Role="Estudiante" EntitySet="Estudiantes" />
-          </AssociationSet>
-          <AssociationSet Name="EstudianteExamenResultado" Association="colegiodbModel.EstudianteExamenResultado">
-            <End Role="Estudiante" EntitySet="Estudiantes" />
-            <End Role="ExamenResultado" EntitySet="ExamenResultados" />
-          </AssociationSet>
-          <AssociationSet Name="ProfesorAula" Association="colegiodbModel.ProfesorAula">
-            <End Role="Aula" EntitySet="Aulas" />
+          <AssociationSet Name="ProfesorUsuario" Association="colegiodbModel.ProfesorUsuario">
             <End Role="Profesor" EntitySet="Profesores" />
+            <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
-          <AssociationSet Name="CursoExamenResultado" Association="colegiodbModel.CursoExamenResultado">
-            <End Role="Curso" EntitySet="Cursos" />
-            <End Role="ExamenResultado" EntitySet="ExamenResultados" />
-          </AssociationSet>
-          <AssociationSet Name="AulaEstudiante" Association="colegiodbModel.AulaEstudiante">
-            <End Role="Aula" EntitySet="Aulas" />
-            <End Role="Estudiante" EntitySet="Estudiantes" />
-          </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Nombre" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Apellido" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Cedula" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RNC" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Tipo" Type="Int32" Nullable="false" />
@@ -561,6 +319,8 @@
           <NavigationProperty Name="Roles" Relationship="colegiodbModel.UsuarioRole" FromRole="Usuario" ToRole="Role" />
           <NavigationProperty Name="TipoUsuario" Relationship="colegiodbModel.UsuarioTipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
           <NavigationProperty Name="Seguridad_Estatus" Relationship="colegiodbModel.UsuarioSeguridad_Estatus" FromRole="Usuario" ToRole="Seguridad_Estatus" />
+          <NavigationProperty Name="Estudiante" Relationship="colegiodbModel.EstudianteUsuario" FromRole="Usuario" ToRole="Estudiante" />
+          <NavigationProperty Name="Profesor" Relationship="colegiodbModel.ProfesorUsuario" FromRole="Usuario" ToRole="Profesor" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -653,208 +413,61 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Aula">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Grado" Relationship="colegiodbModel.GradoAula" FromRole="Aula" ToRole="Grado" />
-          <Property Name="GradoId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Profesor" Relationship="colegiodbModel.ProfesorAula" FromRole="Aula" ToRole="Profesor" />
-          <Property Name="ProfesorId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Estudiantes" Relationship="colegiodbModel.AulaEstudiante" FromRole="Aula" ToRole="Estudiante" />
-        </EntityType>
-        <EntityType Name="Grado">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Cursos" Relationship="colegiodbModel.GradoCurso" FromRole="Grado" ToRole="Curso" />
-          <NavigationProperty Name="Aulas" Relationship="colegiodbModel.GradoAula" FromRole="Grado" ToRole="Aula" />
-        </EntityType>
-        <EntityType Name="Curso">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Grado" Relationship="colegiodbModel.GradoCurso" FromRole="Curso" ToRole="Grado" />
-          <Property Name="GradoId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ExamenResultadoes" Relationship="colegiodbModel.CursoExamenResultado" FromRole="Curso" ToRole="ExamenResultado" />
-        </EntityType>
-        <EntityType Name="Asistencia">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Estudiante" Relationship="colegiodbModel.AsistenciaEstudiante" FromRole="Asistencia" ToRole="Estudiante" />
-          <Property Name="EstudianteId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Examen">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="ExamenTipo" Relationship="colegiodbModel.ExamenTipoExamen" FromRole="Examen" ToRole="ExamenTipo" />
-          <Property Name="ExamenTipoId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ExamenResultados" Relationship="colegiodbModel.ExamenExamenResultado" FromRole="Examen" ToRole="ExamenResultado" />
-        </EntityType>
         <EntityType Name="Estudiante">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Asistencias" Relationship="colegiodbModel.AsistenciaEstudiante" FromRole="Estudiante" ToRole="Asistencia" />
-          <NavigationProperty Name="Padre" Relationship="colegiodbModel.PadreEstudiante" FromRole="Estudiante" ToRole="Padre" />
-          <Property Name="PadreId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ExamenResultadoes" Relationship="colegiodbModel.EstudianteExamenResultado" FromRole="Estudiante" ToRole="ExamenResultado" />
-          <NavigationProperty Name="Aulas" Relationship="colegiodbModel.AulaEstudiante" FromRole="Estudiante" ToRole="Aula" />
+          <Property Name="Nombres" Type="String" Nullable="false" />
+          <Property Name="Apellido" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Telefono" Type="String" Nullable="true" />
+          <Property Name="Celular" Type="String" Nullable="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Fecha_ingreso" Type="DateTime" Nullable="false" />
+          <Property Name="Ult_Fecha_act" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="colegiodbModel.EstudianteUsuario" FromRole="Estudiante" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Profesor">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Aulas" Relationship="colegiodbModel.ProfesorAula" FromRole="Profesor" ToRole="Aula" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+          <Property Name="Nombres" Type="String" Nullable="false" />
+          <Property Name="Apellido" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Telefono" Type="String" Nullable="true" />
+          <Property Name="Celular" Type="String" Nullable="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Fecha_ingreso" Type="DateTime" Nullable="false" />
+          <Property Name="Ult_Fecha_act" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="colegiodbModel.ProfesorUsuario" FromRole="Profesor" ToRole="Usuario" />
         </EntityType>
-        <EntityType Name="Padre">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Estudiantes" Relationship="colegiodbModel.PadreEstudiante" FromRole="Padre" ToRole="Estudiante" />
-        </EntityType>
-        <EntityType Name="ExamenResultado">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Examenes" Relationship="colegiodbModel.ExamenExamenResultado" FromRole="ExamenResultado" ToRole="Examen" />
-          <Property Name="ExamenId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Estudiante" Relationship="colegiodbModel.EstudianteExamenResultado" FromRole="ExamenResultado" ToRole="Estudiante" />
-          <Property Name="EstudianteId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Curso" Relationship="colegiodbModel.CursoExamenResultado" FromRole="ExamenResultado" ToRole="Curso" />
-          <Property Name="CursoId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ExamenTipo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Examen" Relationship="colegiodbModel.ExamenTipoExamen" FromRole="ExamenTipo" ToRole="Examen" />
-        </EntityType>
-        <Association Name="GradoCurso">
-          <End Type="colegiodbModel.Grado" Role="Grado" Multiplicity="1" />
-          <End Type="colegiodbModel.Curso" Role="Curso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Grado">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Curso">
-              <PropertyRef Name="GradoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="GradoAula">
-          <End Type="colegiodbModel.Grado" Role="Grado" Multiplicity="1" />
-          <End Type="colegiodbModel.Aula" Role="Aula" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Grado">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Aula">
-              <PropertyRef Name="GradoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AsistenciaEstudiante">
-          <End Type="colegiodbModel.Asistencia" Role="Asistencia" Multiplicity="*" />
+        <Association Name="EstudianteUsuario">
           <End Type="colegiodbModel.Estudiante" Role="Estudiante" Multiplicity="1" />
+          <End Type="colegiodbModel.Usuario" Role="Usuario" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Estudiante">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Asistencia">
-              <PropertyRef Name="EstudianteId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ExamenTipoExamen">
-          <End Type="colegiodbModel.ExamenTipo" Role="ExamenTipo" Multiplicity="1" />
-          <End Type="colegiodbModel.Examen" Role="Examen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ExamenTipo">
+            <Dependent Role="Usuario">
               <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Examen">
-              <PropertyRef Name="ExamenTipoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ExamenExamenResultado">
-          <End Type="colegiodbModel.Examen" Role="Examen" Multiplicity="1" />
-          <End Type="colegiodbModel.ExamenResultado" Role="ExamenResultado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Examen">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ExamenResultado">
-              <PropertyRef Name="ExamenId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="PadreEstudiante">
-          <End Type="colegiodbModel.Padre" Role="Padre" Multiplicity="1" />
-          <End Type="colegiodbModel.Estudiante" Role="Estudiante" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Padre">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Estudiante">
-              <PropertyRef Name="PadreId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="EstudianteExamenResultado">
-          <End Type="colegiodbModel.Estudiante" Role="Estudiante" Multiplicity="1" />
-          <End Type="colegiodbModel.ExamenResultado" Role="ExamenResultado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estudiante">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ExamenResultado">
-              <PropertyRef Name="EstudianteId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ProfesorAula">
-          <End Type="colegiodbModel.Aula" Role="Aula" Multiplicity="*" />
+        <Association Name="ProfesorUsuario">
           <End Type="colegiodbModel.Profesor" Role="Profesor" Multiplicity="1" />
+          <End Type="colegiodbModel.Usuario" Role="Usuario" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Profesor">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Aula">
-              <PropertyRef Name="ProfesorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CursoExamenResultado">
-          <End Type="colegiodbModel.Curso" Role="Curso" Multiplicity="1" />
-          <End Type="colegiodbModel.ExamenResultado" Role="ExamenResultado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Curso">
+            <Dependent Role="Usuario">
               <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ExamenResultado">
-              <PropertyRef Name="CursoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AulaEstudiante">
-          <End Type="colegiodbModel.Aula" Role="Aula" Multiplicity="*" />
-          <End Type="colegiodbModel.Estudiante" Role="Estudiante" Multiplicity="*" />
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -921,51 +534,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Aulas">
-      <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.Aula)">
-        <MappingFragment StoreEntitySet="Aulas">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="GradoId" ColumnName="GradoId" />
-          <ScalarProperty Name="ProfesorId" ColumnName="ProfesorId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Grados">
-      <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.Grado)">
-        <MappingFragment StoreEntitySet="Grados">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Cursos">
-      <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.Curso)">
-        <MappingFragment StoreEntitySet="Cursos">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="GradoId" ColumnName="GradoId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Asistencias">
-      <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.Asistencia)">
-        <MappingFragment StoreEntitySet="Asistencias">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="EstudianteId" ColumnName="EstudianteId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Examenes">
-      <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.Examen)">
-        <MappingFragment StoreEntitySet="Examenes">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ExamenTipoId" ColumnName="ExamenTipoId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Estudiantes">
       <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.Estudiante)">
         <MappingFragment StoreEntitySet="Estudiantes">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="PadreId" ColumnName="PadreId" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Fecha_ingreso" ColumnName="Fecha_ingreso" />
+          <ScalarProperty Name="Ult_Fecha_act" ColumnName="Ult_Fecha_act" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -973,30 +553,14 @@
       <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.Profesor)">
         <MappingFragment StoreEntitySet="Profesores">
           <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Padres">
-      <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.Padre)">
-        <MappingFragment StoreEntitySet="Padres">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ExamenResultados">
-      <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.ExamenResultado)">
-        <MappingFragment StoreEntitySet="ExamenResultados">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ExamenId" ColumnName="ExamenId" />
-          <ScalarProperty Name="EstudianteId" ColumnName="EstudianteId" />
-          <ScalarProperty Name="CursoId" ColumnName="CursoId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ExamenTipos">
-      <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.ExamenTipo)">
-        <MappingFragment StoreEntitySet="ExamenTipos">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Fecha_ingreso" ColumnName="Fecha_ingreso" />
+          <ScalarProperty Name="Ult_Fecha_act" ColumnName="Ult_Fecha_act" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1014,14 +578,6 @@
       </EndProperty>
       <EndProperty Name="Permiso">
         <ScalarProperty Name="Id" ColumnName="Permisos_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="AulaEstudiante" TypeName="colegiodbModel.AulaEstudiante" StoreEntitySet="AulaEstudiante">
-      <EndProperty Name="Aula">
-        <ScalarProperty Name="Id" ColumnName="Aulas_Id" />
-      </EndProperty>
-      <EndProperty Name="Estudiante">
-        <ScalarProperty Name="Id" ColumnName="Estudiantes_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

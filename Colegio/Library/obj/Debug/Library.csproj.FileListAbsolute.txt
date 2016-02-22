@@ -7,3 +7,13 @@ C:\ProyectoColegio\Colegio\Library\bin\Debug\EntityFramework.xml
 C:\ProyectoColegio\Colegio\Library\bin\Debug\EntityFramework.SqlServer.xml
 C:\ProyectoColegio\Colegio\Library\obj\Debug\Library.dll
 C:\ProyectoColegio\Colegio\Library\obj\Debug\Library.pdb
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\bin\Debug\Library.dll.config
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\bin\Debug\Library.dll
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\bin\Debug\Library.pdb
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\bin\Debug\EntityFramework.dll
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\bin\Debug\EntityFramework.xml
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\obj\Debug\Library.dll
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\obj\Debug\Library.pdb
+C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache

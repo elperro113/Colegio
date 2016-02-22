@@ -14,13 +14,16 @@ namespace Library.Models
     
     public partial class Profesor
     {
-        public Profesor()
-        {
-            this.Aulas = new HashSet<Aula>();
-        }
-    
         public int Id { get; set; }
+        public string Nombres { get; set; }
+        public string Apellido { get; set; }
+        public string Email { get; set; }
+        public string Telefono { get; set; }
+        public string Celular { get; set; }
+        public bool Status { get; set; }
+        public System.DateTime Fecha_ingreso { get; set; }
+        public System.DateTime Ult_Fecha_act { get; set; }
     
-        public virtual ICollection<Aula> Aulas { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

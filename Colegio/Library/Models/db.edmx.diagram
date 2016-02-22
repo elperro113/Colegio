@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="colegiodbModel.Usuario" Width="1.5" PointX="0.75" PointY="3" />
         <EntityTypeShape EntityType="colegiodbModel.Role" Width="1.5" PointX="3" PointY="1.25" />
         <EntityTypeShape EntityType="colegiodbModel.Permiso" Width="1.5" PointX="5.25" PointY="1.125" />
-        <EntityTypeShape EntityType="colegiodbModel.TipoUsuario" Width="1.5" PointX="3" PointY="4" />
+        <EntityTypeShape EntityType="colegiodbModel.TipoUsuario" Width="1.5" PointX="3.875" PointY="4" />
         <EntityTypeShape EntityType="colegiodbModel.Seccion" Width="1.5" PointX="8" PointY="1.125" />
         <EntityTypeShape EntityType="colegiodbModel.Seguridad_Estatus" Width="1.5" PointX="3" PointY="6.5" />
         <AssociationConnector Association="colegiodbModel.UsuarioRole" />
@@ -16,27 +16,11 @@
         <AssociationConnector Association="colegiodbModel.UsuarioSeguridad_Estatus" />
         <AssociationConnector Association="colegiodbModel.RolePermiso" />
         <AssociationConnector Association="colegiodbModel.SeccionPermiso" />
-        <EntityTypeShape EntityType="colegiodbModel.Aula" Width="1.5" PointX="6.25" PointY="4" />
-        <EntityTypeShape EntityType="colegiodbModel.Grado" Width="1.5" PointX="8.375" PointY="4" />
-        <EntityTypeShape EntityType="colegiodbModel.Curso" Width="1.5" PointX="10.625" PointY="4" />
-        <EntityTypeShape EntityType="colegiodbModel.Asistencia" Width="1.5" PointX="6.375" PointY="6.375" />
-        <EntityTypeShape EntityType="colegiodbModel.Examen" Width="1.5" PointX="6.125" PointY="8.375" />
-        <EntityTypeShape EntityType="colegiodbModel.Estudiante" Width="1.5" PointX="12.625" PointY="4" />
-        <EntityTypeShape EntityType="colegiodbModel.Profesor" Width="1.5" PointX="8.875" PointY="6.375" />
-        <EntityTypeShape EntityType="colegiodbModel.Padre" Width="1.5" PointX="13" PointY="8" />
-        <EntityTypeShape EntityType="colegiodbModel.ExamenResultado" Width="1.5" PointX="13" PointY="10" />
-        <EntityTypeShape EntityType="colegiodbModel.ExamenTipo" Width="1.5" PointX="8.25" PointY="10.125" />
-        <AssociationConnector Association="colegiodbModel.GradoCurso" />
-        <AssociationConnector Association="colegiodbModel.GradoAula" />
-        <AssociationConnector Association="colegiodbModel.AsistenciaEstudiante" />
-        <AssociationConnector Association="colegiodbModel.ExamenTipoExamen" />
-        <AssociationConnector Association="colegiodbModel.ExamenExamenResultado" />
-        <AssociationConnector Association="colegiodbModel.PadreEstudiante" />
-        <AssociationConnector Association="colegiodbModel.EstudianteExamenResultado" />
-        <AssociationConnector Association="colegiodbModel.ProfesorAula" />
-        <AssociationConnector Association="colegiodbModel.CursoExamenResultado" />
-        <AssociationConnector Association="colegiodbModel.AulaEstudiante" />
-      </Diagram>
+        <EntityTypeShape EntityType="colegiodbModel.Estudiante" Width="1.5" PointX="5.875" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="colegiodbModel.Profesor" Width="1.5" PointX="8.25" PointY="4" />
+        <AssociationConnector Association="colegiodbModel.EstudianteUsuario" />
+        <AssociationConnector Association="colegiodbModel.ProfesorUsuario" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
