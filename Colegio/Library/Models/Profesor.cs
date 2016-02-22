@@ -12,7 +12,7 @@ namespace Library.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Estudiante
+    public partial class Profesor
     {
         public int Id { get; set; }
         public string Nombres { get; set; }

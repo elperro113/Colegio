@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/17/2016 10:35:43
+-- Date Created: 02/22/2016 14:57:53
 -- Generated from EDMX file: C:\Users\greiman_garcia\Documents\Visual Studio 2015\Projects\colegio\Colegio\Library\Models\db.edmx
 -- --------------------------------------------------
 
@@ -38,8 +38,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_SeccionPermiso]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Permisos] DROP CONSTRAINT [FK_SeccionPermiso];
 GO
+IF OBJECT_ID(N'[dbo].[FK_ProfesorUsuario]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Usuarios] DROP CONSTRAINT [FK_ProfesorUsuario];
+GO
 IF OBJECT_ID(N'[dbo].[FK_EstudianteUsuario]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Estudiantes] DROP CONSTRAINT [FK_EstudianteUsuario];
+    ALTER TABLE [dbo].[Usuarios] DROP CONSTRAINT [FK_EstudianteUsuario];
 GO
 
 -- --------------------------------------------------
@@ -66,6 +69,9 @@ IF OBJECT_ID(N'[dbo].[Seguridad_Estatus]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Estudiantes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Estudiantes];
+GO
+IF OBJECT_ID(N'[dbo].[Profesores]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Profesores];
 GO
 IF OBJECT_ID(N'[dbo].[UsuarioRole]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UsuarioRole];
@@ -136,15 +142,28 @@ GO
 -- Creating table 'Estudiantes'
 CREATE TABLE [dbo].[Estudiantes] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Email] nvarchar(max)  NOT NULL,
     [Nombres] nvarchar(max)  NOT NULL,
     [Apellido] nvarchar(max)  NOT NULL,
+    [Email] nvarchar(max)  NOT NULL,
     [Telefono] nvarchar(max)  NULL,
     [Celular] nvarchar(max)  NULL,
-    [Fecha_ingreso] datetime  NOT NULL,
     [Status] bit  NOT NULL,
-    [Ult_Fecha_act] datetime  NOT NULL,
-    [Usuario_Id] int  NOT NULL
+    [Fecha_ingreso] datetime  NOT NULL,
+    [Ult_Fecha_act] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'Profesores'
+CREATE TABLE [dbo].[Profesores] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Nombres] nvarchar(max)  NOT NULL,
+    [Apellido] nvarchar(max)  NOT NULL,
+    [Email] nvarchar(max)  NOT NULL,
+    [Telefono] nvarchar(max)  NULL,
+    [Celular] nvarchar(max)  NULL,
+    [Status] bit  NOT NULL,
+    [Fecha_ingreso] datetime  NOT NULL,
+    [Ult_Fecha_act] datetime  NOT NULL
 );
 GO
 
@@ -205,6 +224,12 @@ GO
 -- Creating primary key on [Id] in table 'Estudiantes'
 ALTER TABLE [dbo].[Estudiantes]
 ADD CONSTRAINT [PK_Estudiantes]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Profesores'
+ALTER TABLE [dbo].[Profesores]
+ADD CONSTRAINT [PK_Profesores]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -317,19 +342,22 @@ ON [dbo].[Permisos]
     ([SeccionId]);
 GO
 
--- Creating foreign key on [Usuario_Id] in table 'Estudiantes'
-ALTER TABLE [dbo].[Estudiantes]
+-- Creating foreign key on [Id] in table 'Usuarios'
+ALTER TABLE [dbo].[Usuarios]
 ADD CONSTRAINT [FK_EstudianteUsuario]
-    FOREIGN KEY ([Usuario_Id])
-    REFERENCES [dbo].[Usuarios]
+    FOREIGN KEY ([Id])
+    REFERENCES [dbo].[Estudiantes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_EstudianteUsuario'
-CREATE INDEX [IX_FK_EstudianteUsuario]
-ON [dbo].[Estudiantes]
-    ([Usuario_Id]);
+-- Creating foreign key on [Id] in table 'Usuarios'
+ALTER TABLE [dbo].[Usuarios]
+ADD CONSTRAINT [FK_ProfesorUsuario]
+    FOREIGN KEY ([Id])
+    REFERENCES [dbo].[Profesores]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- --------------------------------------------------

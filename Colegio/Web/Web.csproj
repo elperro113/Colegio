@@ -124,6 +124,7 @@
     <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PermisoController.cs" />
+    <Compile Include="Controllers\ProfesorController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SeccionController.cs" />
     <Compile Include="Controllers\TipoUsuariosController.cs" />
@@ -211,6 +212,11 @@
     <Content Include="Views\Usuarios\AddRole.cshtml" />
     <Content Include="Views\Usuarios\RolesByUser.cshtml" />
     <Content Include="Views\Shared\_PartialMenu.cshtml" />
+    <Content Include="Views\Profesor\Create.cshtml" />
+    <Content Include="Views\Profesor\Delete.cshtml" />
+    <Content Include="Views\Profesor\Details.cshtml" />
+    <Content Include="Views\Profesor\Edit.cshtml" />
+    <Content Include="Views\Profesor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

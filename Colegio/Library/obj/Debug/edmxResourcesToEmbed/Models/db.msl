@@ -66,13 +66,28 @@
       <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.Estudiante)">
         <MappingFragment StoreEntitySet="Estudiantes">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Nombres" ColumnName="Nombres" />
           <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Telefono" ColumnName="Telefono" />
           <ScalarProperty Name="Celular" ColumnName="Celular" />
-          <ScalarProperty Name="Fecha_ingreso" ColumnName="Fecha_ingreso" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Fecha_ingreso" ColumnName="Fecha_ingreso" />
+          <ScalarProperty Name="Ult_Fecha_act" ColumnName="Ult_Fecha_act" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profesores">
+      <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.Profesor)">
+        <MappingFragment StoreEntitySet="Profesores">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Fecha_ingreso" ColumnName="Fecha_ingreso" />
           <ScalarProperty Name="Ult_Fecha_act" ColumnName="Ult_Fecha_act" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -91,14 +106,6 @@
       </EndProperty>
       <EndProperty Name="Permiso">
         <ScalarProperty Name="Id" ColumnName="Permisos_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="EstudianteUsuario" TypeName="colegiodbModel.EstudianteUsuario" StoreEntitySet="Estudiantes">
-      <EndProperty Name="Usuario">
-        <ScalarProperty Name="Id" ColumnName="Usuario_Id" />
-      </EndProperty>
-      <EndProperty Name="Estudiante">
-        <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

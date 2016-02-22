@@ -13,6 +13,7 @@
     <EntitySet Name="Secciones" EntityType="colegiodbModel.Store.Secciones" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Seguridad_Estatus" EntityType="colegiodbModel.Store.Seguridad_Estatus" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Estudiantes" EntityType="colegiodbModel.Store.Estudiantes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Profesores" EntityType="colegiodbModel.Store.Profesores" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UsuarioRole" EntityType="colegiodbModel.Store.UsuarioRole" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="RolePermiso" EntityType="colegiodbModel.Store.RolePermiso" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_UsuarioRole_Usuario" Association="colegiodbModel.Store.FK_UsuarioRole_Usuario">
@@ -45,6 +46,10 @@
     </AssociationSet>
     <AssociationSet Name="EstudianteUsuario" Association="colegiodbModel.Store.EstudianteUsuario">
       <End Role="Estudiante" EntitySet="Estudiantes" />
+      <End Role="Usuario" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="ProfesorUsuario" Association="colegiodbModel.Store.ProfesorUsuario">
+      <End Role="Profesor" EntitySet="Profesores" />
       <End Role="Usuario" EntitySet="Usuarios" />
     </AssociationSet>
   </EntityContainer>
@@ -108,15 +113,28 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Nombres" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Telefono" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Celular" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Fecha_ingreso" Type="datetime" Nullable="false" />
     <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Fecha_ingreso" Type="datetime" Nullable="false" />
     <Property Name="Ult_Fecha_act" Type="datetime" Nullable="false" />
-    <Property Name="Usuario_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Profesores">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Celular" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Fecha_ingreso" Type="datetime" Nullable="false" />
+    <Property Name="Ult_Fecha_act" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioRole">
     <Key>
@@ -171,14 +189,26 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="EstudianteUsuario">
-    <End Role="Estudiante" Type="colegiodbModel.Store.Estudiantes" Multiplicity="*" />
-    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="1" />
+    <End Role="Estudiante" Type="colegiodbModel.Store.Estudiantes" Multiplicity="1" />
+    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="Usuario">
+      <Principal Role="Estudiante">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Estudiante">
-        <PropertyRef Name="Usuario_Id" />
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProfesorUsuario">
+    <End Role="Profesor" Type="colegiodbModel.Store.Profesores" Multiplicity="1" />
+    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Profesor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -262,8 +292,13 @@
             <End Role="Permiso" EntitySet="Permisos" />
           </AssociationSet>
           <EntitySet Name="Estudiantes" EntityType="colegiodbModel.Estudiante" />
+          <EntitySet Name="Profesores" EntityType="colegiodbModel.Profesor" />
           <AssociationSet Name="EstudianteUsuario" Association="colegiodbModel.EstudianteUsuario">
             <End Role="Estudiante" EntitySet="Estudiantes" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="ProfesorUsuario" Association="colegiodbModel.ProfesorUsuario">
+            <End Role="Profesor" EntitySet="Profesores" />
             <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
           </EntityContainer>
@@ -285,6 +320,7 @@
           <NavigationProperty Name="TipoUsuario" Relationship="colegiodbModel.UsuarioTipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
           <NavigationProperty Name="Seguridad_Estatus" Relationship="colegiodbModel.UsuarioSeguridad_Estatus" FromRole="Usuario" ToRole="Seguridad_Estatus" />
           <NavigationProperty Name="Estudiante" Relationship="colegiodbModel.EstudianteUsuario" FromRole="Usuario" ToRole="Estudiante" />
+          <NavigationProperty Name="Profesor" Relationship="colegiodbModel.ProfesorUsuario" FromRole="Usuario" ToRole="Profesor" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -382,19 +418,54 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" Nullable="false" />
           <Property Name="Nombres" Type="String" Nullable="false" />
           <Property Name="Apellido" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
           <Property Name="Telefono" Type="String" Nullable="true" />
           <Property Name="Celular" Type="String" Nullable="true" />
-          <Property Name="Fecha_ingreso" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Fecha_ingreso" Type="DateTime" Nullable="false" />
           <Property Name="Ult_Fecha_act" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Usuario" Relationship="colegiodbModel.EstudianteUsuario" FromRole="Estudiante" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Profesor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+          <Property Name="Nombres" Type="String" Nullable="false" />
+          <Property Name="Apellido" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Telefono" Type="String" Nullable="true" />
+          <Property Name="Celular" Type="String" Nullable="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Fecha_ingreso" Type="DateTime" Nullable="false" />
+          <Property Name="Ult_Fecha_act" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="colegiodbModel.ProfesorUsuario" FromRole="Profesor" ToRole="Usuario" />
         </EntityType>
         <Association Name="EstudianteUsuario">
           <End Type="colegiodbModel.Estudiante" Role="Estudiante" Multiplicity="1" />
           <End Type="colegiodbModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProfesorUsuario">
+          <End Type="colegiodbModel.Profesor" Role="Profesor" Multiplicity="1" />
+          <End Type="colegiodbModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Profesor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -467,13 +538,28 @@
       <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.Estudiante)">
         <MappingFragment StoreEntitySet="Estudiantes">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Nombres" ColumnName="Nombres" />
           <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Telefono" ColumnName="Telefono" />
           <ScalarProperty Name="Celular" ColumnName="Celular" />
-          <ScalarProperty Name="Fecha_ingreso" ColumnName="Fecha_ingreso" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Fecha_ingreso" ColumnName="Fecha_ingreso" />
+          <ScalarProperty Name="Ult_Fecha_act" ColumnName="Ult_Fecha_act" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profesores">
+      <EntityTypeMapping TypeName="IsTypeOf(colegiodbModel.Profesor)">
+        <MappingFragment StoreEntitySet="Profesores">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Fecha_ingreso" ColumnName="Fecha_ingreso" />
           <ScalarProperty Name="Ult_Fecha_act" ColumnName="Ult_Fecha_act" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -492,14 +578,6 @@
       </EndProperty>
       <EndProperty Name="Permiso">
         <ScalarProperty Name="Id" ColumnName="Permisos_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="EstudianteUsuario" TypeName="colegiodbModel.EstudianteUsuario" StoreEntitySet="Estudiantes">
-      <EndProperty Name="Usuario">
-        <ScalarProperty Name="Id" ColumnName="Usuario_Id" />
-      </EndProperty>
-      <EndProperty Name="Estudiante">
-        <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

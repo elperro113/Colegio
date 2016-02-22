@@ -71,6 +71,9 @@
     <Compile Include="Models\Permiso.cs">
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Profesor.cs">
+      <DependentUpon>db.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Role.cs">
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
@@ -90,6 +93,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\EstudianteRepository.cs" />
     <Compile Include="Repository\PermisoRepository.cs" />
+    <Compile Include="Repository\ProfesorRepository.cs" />
     <Compile Include="Repository\RolesRepository.cs" />
     <Compile Include="Repository\SessionesRepository.cs" />
     <Compile Include="Repository\StatusRepository.cs" />

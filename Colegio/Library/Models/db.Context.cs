@@ -32,5 +32,6 @@ namespace Library.Models
         public virtual DbSet<Seccion> Secciones { get; set; }
         public virtual DbSet<Seguridad_Estatus> Seguridad_Estatus { get; set; }
         public virtual DbSet<Estudiante> Estudiantes { get; set; }
+        public virtual DbSet<Profesor> Profesores { get; set; }
     }
 }
