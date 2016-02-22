@@ -38,11 +38,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserName" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Password" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Nombre" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Apellido" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Apellido" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Cedula" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="RNC" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Tipo" Type="Int32" Nullable="false" />
@@ -149,8 +149,8 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Email" Type="String" Nullable="false" />
-    <Property Name="Password" Type="String" Nullable="false" />
     <Property Name="Nombres" Type="String" Nullable="false" />
+    <Property Name="Apellido" Type="String" Nullable="false" />
     <Property Name="Telefono" Type="String" Nullable="true" />
     <Property Name="Celular" Type="String" Nullable="true" />
     <Property Name="Fecha_ingreso" Type="DateTime" Nullable="false" />

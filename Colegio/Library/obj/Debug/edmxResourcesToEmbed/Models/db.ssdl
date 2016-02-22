@@ -48,11 +48,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Nombre" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Apellido" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Cedula" Type="nvarchar(max)" Nullable="true" />
     <Property Name="RNC" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Tipo" Type="int" Nullable="false" />
@@ -104,8 +104,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Nombres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Telefono" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Celular" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Fecha_ingreso" Type="datetime" Nullable="false" />

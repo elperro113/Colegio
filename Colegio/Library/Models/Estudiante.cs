@@ -16,8 +16,8 @@ namespace Library.Models
     {
         public int Id { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
         public string Nombres { get; set; }
+        public string Apellido { get; set; }
         public string Telefono { get; set; }
         public string Celular { get; set; }
         public System.DateTime Fecha_ingreso { get; set; }

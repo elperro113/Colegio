@@ -16,7 +16,7 @@
         <AssociationConnector Association="colegiodbModel.UsuarioSeguridad_Estatus" />
         <AssociationConnector Association="colegiodbModel.RolePermiso" />
         <AssociationConnector Association="colegiodbModel.SeccionPermiso" />
-        <EntityTypeShape EntityType="colegiodbModel.Estudiante" Width="1.5" PointX="5.875" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="colegiodbModel.Estudiante" Width="1.5" PointX="5.875" PointY="4" IsExpanded="true" />
         <AssociationConnector Association="colegiodbModel.EstudianteUsuario" />
         </Diagram>
     </edmx:Diagrams>

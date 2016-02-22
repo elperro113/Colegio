@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Library.Models;
+using Library.Repository;
 
 namespace Web.Controllers
 {
@@ -46,7 +47,7 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,Password,Nombres,Telefono,Celular,Fecha_ingreso,Status,Ult_Fecha_act")] Estudiante estudiante)
+        public ActionResult Create([Bind(Include = "Id,Email,Password,Nombres,Apellido,Telefono,Celular,Fecha_ingreso,Status,Ult_Fecha_act")] Estudiante estudiante)
         {
             Usuario usr = new Usuario();
 
@@ -57,13 +58,15 @@ namespace Web.Controllers
                 user.Password = Request.Form["Contrasena"].ToString();
 
                 user.Nombre = estudiante.Nombres;
+                user.Apellido = estudiante.Apellido;
+                user.Email = estudiante.Email;
                 user.Tipo = 2;
-                user.Apellido = estudiante.Nombres;
-                user.Cedula = string.Empty;
+                user.Cedula = estudiante.Celular;
                 user.Estatus = 1;
+
                 estudiante.Usuario = user;
 
-                estudiante.Fecha_ingreso = DateTime.Now;
+                estudiante.Fecha_ingreso = estudiante.Fecha_ingreso;
                 estudiante.Ult_Fecha_act = DateTime.Now;
 
                 db.Estudiantes.Add(estudiante);
@@ -126,8 +129,13 @@ namespace Web.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Estudiante estudiante = db.Estudiantes.Find(id);
+            Usuario user = estudiante.Usuario;
+
+
             db.Estudiantes.Remove(estudiante);
+            db.Usuarios.Remove(user);
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

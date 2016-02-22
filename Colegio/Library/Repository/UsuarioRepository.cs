@@ -18,6 +18,11 @@ namespace Library.Repository
             return db.Usuarios.FirstOrDefault(x => x.Id == Id);
         }
 
+        public Usuario GetByUserName(string userName)
+        {
+            return db.Usuarios.FirstOrDefault(x => x.UserName == userName);
+        }
+
         public IQueryable<Usuario> Login(string userName, string password, int TipoUser)
         {
             return db.Usuarios.Where(x => x.UserName == userName && x.Password == password && x.Tipo == TipoUser);

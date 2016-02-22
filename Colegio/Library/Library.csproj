@@ -98,6 +98,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\img\delete.png" />
+    <Content Include="Content\img\DeleteRed.png" />
+    <Content Include="Content\img\finder.png" />
+    <Content Include="Content\img\friend_finder.png" />
+    <Content Include="Content\img\home.ico" />
+    <Content Include="Content\img\save.png" />
     <Content Include="Models\db.edmx.sql" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />

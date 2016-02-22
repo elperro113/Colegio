@@ -138,6 +138,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Img\delete.png" />
     <Content Include="Content\Img\finder.png" />
+    <Content Include="Content\Img\home.ico" />
     <Content Include="Content\Img\save.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -209,6 +210,7 @@
     <Content Include="Views\Seccion\Index.cshtml" />
     <Content Include="Views\Usuarios\AddRole.cshtml" />
     <Content Include="Views\Usuarios\RolesByUser.cshtml" />
+    <Content Include="Views\Shared\_PartialMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

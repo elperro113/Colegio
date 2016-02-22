@@ -1,0 +1,25 @@
+﻿
+<ul class="nav navbar-nav">
+    <li><a href="/Home"><img alt="" style width=42px; src="@Url.Content("~/Content/img/home.ico")" /></a></li>
+    @{
+        Library.Repository.UsuarioRepository _RepUser = new Library.Repository.UsuarioRepository();
+        Library.Models.Usuario user = _RepUser.GetByUserName(HttpContext.Current.User.Identity.Name);
+
+        if (user != null)
+        {
+            foreach (var item in user.Secciones().OrderBy(x => x.Orden))
+            {
+                <li>
+                    <a href="#">@item.Nombre</a>
+                    <ul class="nav_l2">
+                        @foreach (var perm in user.Permisos(item.Id))
+                        {
+                            <li><a href='@perm.Url'>@perm.Nombre</a></li>
+                        }
+                    </ul>
+                </li>
+            }
+        }
+    }
+    }
+</ul>
