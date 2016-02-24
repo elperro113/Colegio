@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/22/2016 15:23:38
+-- Date Created: 02/24/2016 14:40:22
 -- Generated from EDMX file: C:\ProyectoColegio\Colegio\Library\Models\db.edmx
 -- --------------------------------------------------
 
@@ -38,11 +38,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_SeccionPermiso]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Permisos] DROP CONSTRAINT [FK_SeccionPermiso];
 GO
-IF OBJECT_ID(N'[dbo].[FK_EstudianteUsuario]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Usuarios] DROP CONSTRAINT [FK_EstudianteUsuario];
+IF OBJECT_ID(N'[dbo].[FK_EstudianteUsuario_Estudiante]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EstudianteUsuario] DROP CONSTRAINT [FK_EstudianteUsuario_Estudiante];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ProfesorUsuario]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Usuarios] DROP CONSTRAINT [FK_ProfesorUsuario];
+IF OBJECT_ID(N'[dbo].[FK_EstudianteUsuario_Usuario]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EstudianteUsuario] DROP CONSTRAINT [FK_EstudianteUsuario_Usuario];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UsuarioProfesor_Usuario]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UsuarioProfesor] DROP CONSTRAINT [FK_UsuarioProfesor_Usuario];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UsuarioProfesor_Profesor]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UsuarioProfesor] DROP CONSTRAINT [FK_UsuarioProfesor_Profesor];
 GO
 
 -- --------------------------------------------------
@@ -79,6 +85,12 @@ GO
 IF OBJECT_ID(N'[dbo].[RolePermiso]', 'U') IS NOT NULL
     DROP TABLE [dbo].[RolePermiso];
 GO
+IF OBJECT_ID(N'[dbo].[EstudianteUsuario]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EstudianteUsuario];
+GO
+IF OBJECT_ID(N'[dbo].[UsuarioProfesor]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UsuarioProfesor];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -87,13 +99,11 @@ GO
 -- Creating table 'Usuarios'
 CREATE TABLE [dbo].[Usuarios] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [UserName] nvarchar(max)  NOT NULL,
-    [Password] nvarchar(max)  NOT NULL,
-    [Email] nvarchar(max)  NOT NULL,
-    [Nombre] nvarchar(max)  NOT NULL,
-    [Apellido] nvarchar(max)  NOT NULL,
-    [Cedula] nvarchar(max)  NULL,
-    [RNC] nvarchar(max)  NULL,
+    [UserName] nvarchar(max)  NULL,
+    [Password] nvarchar(max)  NULL,
+    [Email] nvarchar(max)  NULL,
+    [Nombre] nvarchar(max)  NULL,
+    [Apellido] nvarchar(max)  NULL,
     [Tipo] int  NOT NULL,
     [Estatus] int  NOT NULL
 );
@@ -181,6 +191,20 @@ CREATE TABLE [dbo].[RolePermiso] (
 );
 GO
 
+-- Creating table 'EstudianteUsuario'
+CREATE TABLE [dbo].[EstudianteUsuario] (
+    [Estudiantes_Id] int  NOT NULL,
+    [Usuarios_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'UsuarioProfesor'
+CREATE TABLE [dbo].[UsuarioProfesor] (
+    [Usuarios_Id] int  NOT NULL,
+    [Profesors_Id] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -243,6 +267,18 @@ GO
 ALTER TABLE [dbo].[RolePermiso]
 ADD CONSTRAINT [PK_RolePermiso]
     PRIMARY KEY CLUSTERED ([Roles_Id], [Permisos_Id] ASC);
+GO
+
+-- Creating primary key on [Estudiantes_Id], [Usuarios_Id] in table 'EstudianteUsuario'
+ALTER TABLE [dbo].[EstudianteUsuario]
+ADD CONSTRAINT [PK_EstudianteUsuario]
+    PRIMARY KEY CLUSTERED ([Estudiantes_Id], [Usuarios_Id] ASC);
+GO
+
+-- Creating primary key on [Usuarios_Id], [Profesors_Id] in table 'UsuarioProfesor'
+ALTER TABLE [dbo].[UsuarioProfesor]
+ADD CONSTRAINT [PK_UsuarioProfesor]
+    PRIMARY KEY CLUSTERED ([Usuarios_Id], [Profesors_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -342,22 +378,52 @@ ON [dbo].[Permisos]
     ([SeccionId]);
 GO
 
--- Creating foreign key on [Id] in table 'Usuarios'
-ALTER TABLE [dbo].[Usuarios]
-ADD CONSTRAINT [FK_EstudianteUsuario]
-    FOREIGN KEY ([Id])
+-- Creating foreign key on [Estudiantes_Id] in table 'EstudianteUsuario'
+ALTER TABLE [dbo].[EstudianteUsuario]
+ADD CONSTRAINT [FK_EstudianteUsuario_Estudiante]
+    FOREIGN KEY ([Estudiantes_Id])
     REFERENCES [dbo].[Estudiantes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Id] in table 'Usuarios'
-ALTER TABLE [dbo].[Usuarios]
-ADD CONSTRAINT [FK_ProfesorUsuario]
-    FOREIGN KEY ([Id])
+-- Creating foreign key on [Usuarios_Id] in table 'EstudianteUsuario'
+ALTER TABLE [dbo].[EstudianteUsuario]
+ADD CONSTRAINT [FK_EstudianteUsuario_Usuario]
+    FOREIGN KEY ([Usuarios_Id])
+    REFERENCES [dbo].[Usuarios]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EstudianteUsuario_Usuario'
+CREATE INDEX [IX_FK_EstudianteUsuario_Usuario]
+ON [dbo].[EstudianteUsuario]
+    ([Usuarios_Id]);
+GO
+
+-- Creating foreign key on [Usuarios_Id] in table 'UsuarioProfesor'
+ALTER TABLE [dbo].[UsuarioProfesor]
+ADD CONSTRAINT [FK_UsuarioProfesor_Usuario]
+    FOREIGN KEY ([Usuarios_Id])
+    REFERENCES [dbo].[Usuarios]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Profesors_Id] in table 'UsuarioProfesor'
+ALTER TABLE [dbo].[UsuarioProfesor]
+ADD CONSTRAINT [FK_UsuarioProfesor_Profesor]
+    FOREIGN KEY ([Profesors_Id])
     REFERENCES [dbo].[Profesores]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UsuarioProfesor_Profesor'
+CREATE INDEX [IX_FK_UsuarioProfesor_Profesor]
+ON [dbo].[UsuarioProfesor]
+    ([Profesors_Id]);
 GO
 
 -- --------------------------------------------------

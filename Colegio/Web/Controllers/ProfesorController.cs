@@ -61,15 +61,15 @@ namespace Web.Controllers
                 user.Apellido = profesor.Apellido;
                 user.Email = profesor.Email;
                 user.Tipo = 1;
-                user.Cedula = profesor.Celular;
+                
                 user.Estatus = 1;
 
-                profesor.Usuario = user;
+                //profesor.Usuario = user;
 
-                profesor.Fecha_ingreso = profesor.Fecha_ingreso;
-                profesor.Ult_Fecha_act = DateTime.Now;
+                //profesor.Fecha_ingreso = profesor.Fecha_ingreso;
+                //profesor.Ult_Fecha_act = DateTime.Now;
 
-                db.Profesores.Add(profesor);
+                //db.Profesores.Add(profesor);
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
@@ -129,10 +129,10 @@ namespace Web.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Profesor profesor = db.Profesores.Find(id);
-            Usuario user = profesor.Usuario;
+            //Usuario user = profesor.Usuario;
 
             db.Profesores.Remove(profesor);
-            db.Usuarios.Remove(user);
+            //db.Usuarios.Remove(user);
 
             db.SaveChanges();
             return RedirectToAction("Index");

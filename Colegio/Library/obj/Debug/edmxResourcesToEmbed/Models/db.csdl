@@ -33,9 +33,9 @@
       <End Role="Estudiante" EntitySet="Estudiantes" />
       <End Role="Usuario" EntitySet="Usuarios" />
     </AssociationSet>
-    <AssociationSet Name="ProfesorUsuario" Association="colegiodbModel.ProfesorUsuario">
-      <End Role="Profesor" EntitySet="Profesores" />
+    <AssociationSet Name="UsuarioProfesor" Association="colegiodbModel.UsuarioProfesor">
       <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Profesor" EntitySet="Profesores" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Usuario">
@@ -43,20 +43,18 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Apellido" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Cedula" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="RNC" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+    <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+    <Property Name="Apellido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
     <Property Name="Tipo" Type="Int32" Nullable="false" />
     <Property Name="Estatus" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Roles" Relationship="colegiodbModel.UsuarioRole" FromRole="Usuario" ToRole="Role" />
     <NavigationProperty Name="TipoUsuario" Relationship="colegiodbModel.UsuarioTipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
     <NavigationProperty Name="Seguridad_Estatus" Relationship="colegiodbModel.UsuarioSeguridad_Estatus" FromRole="Usuario" ToRole="Seguridad_Estatus" />
-    <NavigationProperty Name="Estudiante" Relationship="colegiodbModel.EstudianteUsuario" FromRole="Usuario" ToRole="Estudiante" />
-    <NavigationProperty Name="Profesor" Relationship="colegiodbModel.ProfesorUsuario" FromRole="Usuario" ToRole="Profesor" />
+    <NavigationProperty Name="Estudiantes" Relationship="colegiodbModel.EstudianteUsuario" FromRole="Usuario" ToRole="Estudiante" />
+    <NavigationProperty Name="Profesors" Relationship="colegiodbModel.UsuarioProfesor" FromRole="Usuario" ToRole="Profesor" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -162,7 +160,7 @@
     <Property Name="Status" Type="Boolean" Nullable="false" />
     <Property Name="Fecha_ingreso" Type="DateTime" Nullable="false" />
     <Property Name="Ult_Fecha_act" Type="DateTime" Nullable="false" />
-    <NavigationProperty Name="Usuario" Relationship="colegiodbModel.EstudianteUsuario" FromRole="Estudiante" ToRole="Usuario" />
+    <NavigationProperty Name="Usuarios" Relationship="colegiodbModel.EstudianteUsuario" FromRole="Estudiante" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Profesor">
     <Key>
@@ -177,30 +175,14 @@
     <Property Name="Status" Type="Boolean" Nullable="false" />
     <Property Name="Fecha_ingreso" Type="DateTime" Nullable="false" />
     <Property Name="Ult_Fecha_act" Type="DateTime" Nullable="false" />
-    <NavigationProperty Name="Usuario" Relationship="colegiodbModel.ProfesorUsuario" FromRole="Profesor" ToRole="Usuario" />
+    <NavigationProperty Name="Usuarios" Relationship="colegiodbModel.UsuarioProfesor" FromRole="Profesor" ToRole="Usuario" />
   </EntityType>
   <Association Name="EstudianteUsuario">
-    <End Type="colegiodbModel.Estudiante" Role="Estudiante" Multiplicity="1" />
-    <End Type="colegiodbModel.Usuario" Role="Usuario" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Estudiante">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Usuario">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
+    <End Type="colegiodbModel.Estudiante" Role="Estudiante" Multiplicity="*" />
+    <End Type="colegiodbModel.Usuario" Role="Usuario" Multiplicity="*" />
   </Association>
-  <Association Name="ProfesorUsuario">
-    <End Type="colegiodbModel.Profesor" Role="Profesor" Multiplicity="1" />
-    <End Type="colegiodbModel.Usuario" Role="Usuario" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Profesor">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Usuario">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
+  <Association Name="UsuarioProfesor">
+    <End Type="colegiodbModel.Usuario" Role="Usuario" Multiplicity="*" />
+    <End Type="colegiodbModel.Profesor" Role="Profesor" Multiplicity="*" />
   </Association>
 </Schema>

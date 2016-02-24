@@ -11,6 +11,8 @@
     <EntitySet Name="Profesores" EntityType="colegiodbModel.Store.Profesores" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UsuarioRole" EntityType="colegiodbModel.Store.UsuarioRole" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="RolePermiso" EntityType="colegiodbModel.Store.RolePermiso" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EstudianteUsuario" EntityType="colegiodbModel.Store.EstudianteUsuario" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UsuarioProfesor" EntityType="colegiodbModel.Store.UsuarioProfesor" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_UsuarioRole_Usuario" Association="colegiodbModel.Store.FK_UsuarioRole_Usuario">
       <End Role="Usuario" EntitySet="Usuarios" />
       <End Role="UsuarioRole" EntitySet="UsuarioRole" />
@@ -39,13 +41,21 @@
       <End Role="Seccion" EntitySet="Secciones" />
       <End Role="Permiso" EntitySet="Permisos" />
     </AssociationSet>
-    <AssociationSet Name="EstudianteUsuario" Association="colegiodbModel.Store.EstudianteUsuario">
+    <AssociationSet Name="FK_EstudianteUsuario_Estudiante" Association="colegiodbModel.Store.FK_EstudianteUsuario_Estudiante">
       <End Role="Estudiante" EntitySet="Estudiantes" />
-      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="EstudianteUsuario" EntitySet="EstudianteUsuario" />
     </AssociationSet>
-    <AssociationSet Name="ProfesorUsuario" Association="colegiodbModel.Store.ProfesorUsuario">
-      <End Role="Profesor" EntitySet="Profesores" />
+    <AssociationSet Name="FK_EstudianteUsuario_Usuario" Association="colegiodbModel.Store.FK_EstudianteUsuario_Usuario">
       <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="EstudianteUsuario" EntitySet="EstudianteUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioProfesor_Usuario" Association="colegiodbModel.Store.FK_UsuarioProfesor_Usuario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="UsuarioProfesor" EntitySet="UsuarioProfesor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioProfesor_Profesor" Association="colegiodbModel.Store.FK_UsuarioProfesor_Profesor">
+      <End Role="Profesor" EntitySet="Profesores" />
+      <End Role="UsuarioProfesor" EntitySet="UsuarioProfesor" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Usuarios">
@@ -53,13 +63,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Cedula" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="RNC" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Tipo" Type="int" Nullable="false" />
     <Property Name="Estatus" Type="int" Nullable="false" />
   </EntityType>
@@ -147,6 +155,22 @@
     <Property Name="Roles_Id" Type="int" Nullable="false" />
     <Property Name="Permisos_Id" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="EstudianteUsuario">
+    <Key>
+      <PropertyRef Name="Estudiantes_Id" />
+      <PropertyRef Name="Usuarios_Id" />
+    </Key>
+    <Property Name="Estudiantes_Id" Type="int" Nullable="false" />
+    <Property Name="Usuarios_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UsuarioProfesor">
+    <Key>
+      <PropertyRef Name="Usuarios_Id" />
+      <PropertyRef Name="Profesors_Id" />
+    </Key>
+    <Property Name="Usuarios_Id" Type="int" Nullable="false" />
+    <Property Name="Profesors_Id" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="UsuarioTipoUsuario">
     <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="*" />
     <End Role="TipoUsuario" Type="colegiodbModel.Store.TipoUsuarios" Multiplicity="1" />
@@ -180,30 +204,6 @@
       </Principal>
       <Dependent Role="Permiso">
         <PropertyRef Name="SeccionId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="EstudianteUsuario">
-    <End Role="Estudiante" Type="colegiodbModel.Store.Estudiantes" Multiplicity="1" />
-    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Estudiante">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Usuario">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ProfesorUsuario">
-    <End Role="Profesor" Type="colegiodbModel.Store.Profesores" Multiplicity="1" />
-    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Profesor">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Usuario">
-        <PropertyRef Name="Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -252,6 +252,54 @@
       </Principal>
       <Dependent Role="RolePermiso">
         <PropertyRef Name="Permisos_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstudianteUsuario_Estudiante">
+    <End Role="Estudiante" Type="colegiodbModel.Store.Estudiantes" Multiplicity="1" />
+    <End Role="EstudianteUsuario" Type="colegiodbModel.Store.EstudianteUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estudiante">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstudianteUsuario">
+        <PropertyRef Name="Estudiantes_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstudianteUsuario_Usuario">
+    <End Role="EstudianteUsuario" Type="colegiodbModel.Store.EstudianteUsuario" Multiplicity="*" />
+    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstudianteUsuario">
+        <PropertyRef Name="Usuarios_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioProfesor_Usuario">
+    <End Role="Usuario" Type="colegiodbModel.Store.Usuarios" Multiplicity="1" />
+    <End Role="UsuarioProfesor" Type="colegiodbModel.Store.UsuarioProfesor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsuarioProfesor">
+        <PropertyRef Name="Usuarios_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioProfesor_Profesor">
+    <End Role="UsuarioProfesor" Type="colegiodbModel.Store.UsuarioProfesor" Multiplicity="*" />
+    <End Role="Profesor" Type="colegiodbModel.Store.Profesores" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Profesor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsuarioProfesor">
+        <PropertyRef Name="Profesors_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

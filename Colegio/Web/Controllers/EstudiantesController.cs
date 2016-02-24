@@ -61,15 +61,15 @@ namespace Web.Controllers
                 user.Apellido = estudiante.Apellido;
                 user.Email = estudiante.Email;
                 user.Tipo = 2;
-                user.Cedula = estudiante.Celular;
+               
                 user.Estatus = 1;
 
-                estudiante.Usuario = user;
+                //estudiante.Usuario = user;
 
-                estudiante.Fecha_ingreso = estudiante.Fecha_ingreso;
-                estudiante.Ult_Fecha_act = DateTime.Now;
+                //estudiante.Fecha_ingreso = estudiante.Fecha_ingreso;
+                //estudiante.Ult_Fecha_act = DateTime.Now;
 
-                db.Estudiantes.Add(estudiante);
+                //db.Estudiantes.Add(estudiante);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -129,11 +129,11 @@ namespace Web.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Estudiante estudiante = db.Estudiantes.Find(id);
-            Usuario user = estudiante.Usuario;
+            //Usuario user = estudiante.Usuario;
 
 
             db.Estudiantes.Remove(estudiante);
-            db.Usuarios.Remove(user);
+            //db.Usuarios.Remove(user);
             db.SaveChanges();
 
             return RedirectToAction("Index");

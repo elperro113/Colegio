@@ -17,6 +17,8 @@ namespace Library.Models
         public Usuario()
         {
             this.Roles = new HashSet<Role>();
+            this.Estudiantes = new HashSet<Estudiante>();
+            this.Profesors = new HashSet<Profesor>();
         }
     
         public int Id { get; set; }
@@ -25,15 +27,13 @@ namespace Library.Models
         public string Email { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public string Cedula { get; set; }
-        public string RNC { get; set; }
         public int Tipo { get; set; }
         public int Estatus { get; set; }
     
         public virtual ICollection<Role> Roles { get; set; }
         public virtual TipoUsuario TipoUsuario { get; set; }
         public virtual Seguridad_Estatus Seguridad_Estatus { get; set; }
-        public virtual Estudiante Estudiante { get; set; }
-        public virtual Profesor Profesor { get; set; }
+        public virtual ICollection<Estudiante> Estudiantes { get; set; }
+        public virtual ICollection<Profesor> Profesors { get; set; }
     }
 }

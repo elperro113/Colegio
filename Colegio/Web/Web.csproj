@@ -127,11 +127,13 @@
     <Compile Include="Controllers\ProfesorController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SeccionController.cs" />
+    <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Controllers\TipoUsuariosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Seguridad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -217,10 +219,10 @@
     <Content Include="Views\Profesor\Details.cshtml" />
     <Content Include="Views\Profesor\Edit.cshtml" />
     <Content Include="Views\Profesor\Index.cshtml" />
+    <Content Include="Views\Seguridad\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

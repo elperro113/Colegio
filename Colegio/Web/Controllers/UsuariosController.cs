@@ -7,12 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Library.Models;
-
+using  Library.Repository;
 namespace Web.Controllers
 {
     public class UsuariosController : Controller
     {
         private Context db = new Context();
+       UsuarioRepository RepUser = new UsuarioRepository();
 
         // GET: Usuarios
         public ActionResult Index()
@@ -53,9 +54,7 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Usuarios.Add(usuario);
-
-                db.SaveChanges();
+                RepUser.Insert(usuario);
                 return RedirectToAction("Index");
             }
 

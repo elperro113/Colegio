@@ -10,8 +10,6 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
-          <ScalarProperty Name="RNC" ColumnName="RNC" />
           <ScalarProperty Name="Tipo" ColumnName="Tipo" />
           <ScalarProperty Name="Estatus" ColumnName="Estatus" />
         </MappingFragment>
@@ -106,6 +104,22 @@
       </EndProperty>
       <EndProperty Name="Permiso">
         <ScalarProperty Name="Id" ColumnName="Permisos_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EstudianteUsuario" TypeName="colegiodbModel.EstudianteUsuario" StoreEntitySet="EstudianteUsuario">
+      <EndProperty Name="Estudiante">
+        <ScalarProperty Name="Id" ColumnName="Estudiantes_Id" />
+      </EndProperty>
+      <EndProperty Name="Usuario">
+        <ScalarProperty Name="Id" ColumnName="Usuarios_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UsuarioProfesor" TypeName="colegiodbModel.UsuarioProfesor" StoreEntitySet="UsuarioProfesor">
+      <EndProperty Name="Usuario">
+        <ScalarProperty Name="Id" ColumnName="Usuarios_Id" />
+      </EndProperty>
+      <EndProperty Name="Profesor">
+        <ScalarProperty Name="Id" ColumnName="Profesors_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
